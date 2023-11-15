@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./partials/head.ejs") %>
+<body>
+    <!--Navigation Menu an Bar teacher-->
+    <%- include("./partials/nav.ejs") %>
+
+    <!--Course Details teacher-->
+    <section class="p-5 bg-success">
+        <div class="details container p-5 bg-white">
+          
+         
+        <h2>A new order is placed </h2> 
+        <h3><%= orderDetails.name%></h3>
+        <% orderDetails.cart.forEach(menuItem => { %>
+        <p>Item Name: <%= menuItem.courseName%></p>
+        <p>Quantity: <%= menuItem.quantity%></p>        
+        <% }) %>
+        <p>Total payment: <%= orderDetails.carttotal%></p>
+
+        </div>
+    </section>
+    
+
+    <!-- Footer -->
+    <%- include("./partials/footer.ejs") %>
+       <!--js code to for delete button-->    
+  </body>
+</html>
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+<html lang="en">
+    <%- include("./partials/head.ejs") %>
+<body>
+    <!--Navigation Menu an Bar-->
+    <%- include("./partials/nav.ejs") %>
+
+    
+</body></html>

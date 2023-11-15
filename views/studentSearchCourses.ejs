@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./partials/head.ejs") %>
+<body>
+    <!--Navigation Menu an Bar-->
+    <%- include("./partials/nav.ejs") %>
+
+    <!--Course Details-->
+    <section class="p-5 bg-success">
+        <div class="details container p-5 bg-white">
+         
+        <h2>Search for Course by Name</h2> 
+
+        <div class="details container p-5 bg-white">
+          <% if (courses.length > 0) { %>
+            <% courses.forEach(course => { %>               
+            
+              <a class="dropdown-item" href="/courses/<%= course._id %>"><%= course.name %></a>
+
+            <% }) %>    
+          <% } %>     
+        </div>     
+      </div>
+    </section>
+      
+    
+
+    <!-- Footer -->
+    <%- include("./partials/footer.ejs") %>    
+
+</body>
+</html>

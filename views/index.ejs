@@ -1,0 +1,250 @@
+<html lang="en">
+    <%- include("./partials/head.ejs") %>
+<body>
+    <!--Navigation Menu an Bar teacher-->
+    <%- include("./partials/nav.ejs") %>
+
+    <!--Showcase or main header area-->
+    <section class="bg-dark text-light p-5 p-lg-0 pt-lg-2 text-center text-sm-start">
+        <div class="container m-4">
+            <div class="d-sm-flex align-items-center justify-content-between ">
+                <div>
+                    <h1><span class="text-warning">
+                        Welcome to <br>Dragons Home!!
+                    </span></h1>
+                    <p class="lead my-4">
+                        Sign up to joing the dragons family and start ordering.<br> We look forward to serving you.
+                    </p>
+                    <% if (!(student||member)){%>
+                    <a href="/memberSignup" class="btn btn-warning mt-3">
+                        <i class="bi bi-chevron-right"></i> member sign up
+                    </a>
+                <%}%>
+                    
+                </div>
+                <img class="img-fluid w-100 d-none d-sm-block m-4" src="img/dragonWall.jpg"  style="height:400px;" alt="">
+            </div>
+        </div>
+    </section>
+
+    <!--Newsletter and form-->
+    <section class="bg-success text-light p-5">
+        <div class="container" >
+            <div class="d-md-flex justify-content-between align-items-center">
+                <h3 class="mb-3 mb-md-0" align="center">Here is where all the fun begins!</h3>                
+            </div>
+        </div>
+    </section>
+
+    <!--Boxes-->
+    <section class="p-5">
+        <div class="container">
+            <div class="row text-center g-4">
+                <div class="col-md">
+                    <div class="card bg-dark text-light" style="height : 385px;">
+                        <div class="card-body text center">
+                            <div class="h1 mb-3">
+                                <img src="/img/rangoon.png" class="rounded-circle mb-2 mt-2"  style="width:200px; height: 200px;" float="left" alt="">
+                                
+                            </div>
+                            <h3 class="card-title mb-3">
+                                Appetizers
+                            </h3>
+                            <p class="card-text">
+                                Multiple options to choose from, Crab rangoon, Edamame, or Pot Stickers
+                            </p>
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="card bg-danger text-light" style="height : 385px;">
+                        <div class="card-body text center">
+                            <div class="h1 mb-3">
+                                <img src="/img/riceNSteak.jpg" class="rounded-circle mb-2 mt-2"  style="width:200px; height: 200px;" float="left" alt="">
+                               
+                            </div>
+                            <h3 class="card-title mb-3">
+                                Platters
+                            </h3>
+                            <p class="card-text">
+                                Enjoy one of oure famous fried rice platters with your choice of protein
+                            </p>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="card bg-dark text-light" style="height : 385px;">
+                        <div class="card-body text center">
+                            <div class="h1 mb-3">
+                                <img src="/img/friedIcecream.jpg" class="rounded-circle mb-2 mt-2"  style="width:200px; height: 200px;" float="left" alt="">
+                                
+                            </div>
+                            <h3 class="card-title mb-3">
+                                Dessert
+                            </h3>
+                            <p class="card-text">
+                                Fried ice cream? yes! we fry it , come try it with more dessert options to choose from
+                            </p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+<!--Question Accordion-->
+<section id="questions" class="p-5 bg-success text-light">
+    <div class="container">
+        <h2 class="text-center mb-4">Frequently Asked Questions</h2>
+        <div class="accordion accordion-flush" id="questions">
+
+            <!--Item 1-->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#question-one">
+                  Where exactly are you located?
+                </button>
+              </h2>
+              <div id="question-one" class="accordion-collapse collapse" data-bs-parent="#questions">
+                <div class="accordion-body text-dark">We are located in Dragon, UT. 766 Massachusetts Ave, Indianapolis, IN 46204.</div>
+              </div>
+            </div>
+            <!-- Item 2-->
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#question-two">
+                    How much does it cost to have dinner at you place?
+                  </button>
+                </h2>
+                <div id="question-two" class="accordion-collapse collapse" data-bs-parent="#questions">
+                  <div class="accordion-body text-dark"">It would cost around $10-20 based on your choices of drinks and desserts. </div>
+                </div>
+              </div>
+            <!-- Item 3-->
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#question-three">
+                    Do you have minimun charge?
+                  </button>
+                </h2>
+                <div id="question-three" class="accordion-collapse collapse" data-bs-parent="#questions">
+                  <div class="accordion-body text-dark"">No we don't! you jast pay for what you order.</div>
+                </div>
+              </div>
+          </div>
+          <!-- Item 4-->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#question-four">
+                How do I sign up?
+              </button>
+            </h2>
+            <div id="question-four" class="accordion-collapse collapse" data-bs-parent="#questions">
+              <div class="accordion-body text-dark"">Hit the sign up button, fill in 3 boxes only and submit!</div>
+            </div>
+          </div> 
+          <!-- Item 5-->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#question-five">
+                How can I know more about each menu item contents.
+              </button>
+            </h2>
+            <div id="question-five" class="accordion-collapse collapse" data-bs-parent="#questions">
+              <div class="accordion-body text-dark"" >Click on any menu item and that will open a page with all you want to knpw about that item, enjoy!</div>
+            </div>
+          </div>
+    </div>
+</section>
+
+    <!--Learn Section-->
+    <section id="learn" class="p-5 text-success">
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-md">
+                    <img src="img/dragonBW.jpg" style="height: 600px; width: 450px;" class="img-fluid" alt="">
+                </div>
+                <div class="col-md p-5">
+                    <h2>Creat an account to start ordering</h2>
+                    <p class="lead">
+                        Fill in a very small form to become a dragon, then you will be able to place orders or make reservation
+                    </p>
+                    <p>
+                        Become a Dragon to start ordering!
+                    </p>
+                    <a href="/memberSignup" class="btn btn-danger mt-3">
+                        <i class="bi bi-chevron-right"></i> Member sign up
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="learn" class="p-5 bg-dark text-success">
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-md p-5">
+                    <h2>Sushi</h2>
+                    <p class="lead">
+                        Yummy varieties to choose from
+                    </p>
+                    <p>
+                        Signup to place an order
+                    </p>
+                    <a href="/memberSignup" class="btn btn-danger mt-3">
+                        <i class="bi bi-chevron-right"></i> Member sign up
+                    </a>
+                </div>
+                <div class="col-md">
+                    <img src="img/sushiIntro.jpg" class="img-fluid" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Contact and Map-->
+<section class="p-5 bg-success">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md">
+                <h2 class="text-center mb-4">Contact Info</h2>
+                <ul class="list-group list-group-flush lead">
+                    <li class="list-group-item">
+                        <span class="fw-bold">Location</span> Dragon, Utah
+                    </li>
+                    <li class="list-group-item">
+                        <span class="fw-bold">Teacher Phone</span> (555) 555-5555
+                    </li>
+                    <li class="list-group-item">
+                        <span class="fw-bold">Student Phone</span> (333) 333-3333
+                    </li>
+                    <li class="list-group-item">
+                        <span class="fw-bold">Teacher Email</span> teacher@dragons.edu
+                    </li>
+                    <li class="list-group-item">
+                        <span class="fw-bold">Student Email</span> student@dragons.edu
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md">
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+ <%- include("./partials/footer.ejs") %>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+
+
+</body>
+</html>

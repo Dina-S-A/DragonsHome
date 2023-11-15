@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./partials/head.ejs") %>
+<body>
+    <!--Navigation Menu an Bar-->
+        <%- include("./partials/nav.ejs") %>
+
+    <!--Showcase or main header area-->
+    
+        
+
+            <div class="courses content p-5" >
+
+                
+                <h2 class="name"><%=studentDetails.name %>'s Schedule</h2> 
+               
+                <% if (studentDetails.schedule.length > 0) { %> 
+                <% studentDetails.schedule.forEach(course => { %>
+                    <form  action="/students/deleteFromSchedule/<%= student._id%> " method="post">
+                    <a class="single" href="#">
+
+                        <h3 class="name"><%= course.courseName %></h3>          
+                        <p class="subArea">Subject Area: <%= course.courseSubArea %></p>
+                        <p class="numcred">Credits: <%= course.courseCredit %></p>
+                    </a>
+                        <!--hidden input to have the course id who created the course-->
+                         <input type = "text" id = "courseId" name = "courseId" style="display:none;" value="<%= course.courseId%>"> 
+                         <button  type="submit"  class="btn btn-danger btn-lg bi bi-chevron-right deleteFromSchedule p-1">Remove from schedule</button>
+                      
+                                         
+                 </form>
+                 <br>
+                      
+                      <% }) %>
+                    
+            </div>
+              
+              <% } else { %>
+                <p>There are no courses to display...</p>
+                <% } %>
+
+
+
+<!-- Footer -->
+<%- include("./partials/footer.ejs") %>     
+
+<script>
+     
+    const trashcan = document.querySelector('.delete');
+        
+    trashcan.addEventListener('click', (e) => {
+      const endpoint = `/students/deleteFromSchedule/${trashcan.dataset.std}/${trashcan.dataset.crs}`; //<!--note here we used datset.doc as doc is name we gave to data in <.delete> above which has the id-->
+       
+      fetch(endpoint, {
+        method: 'DELETE'
+      .then((response) => response.json())
+      .then((data) => window.location.href = data.redirect)
+      .catch(err => console.log(err))
+    });
+})
+
+
+   
+    
+</script>
+   
+</body>
+</html>

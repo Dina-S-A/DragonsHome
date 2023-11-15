@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./partials/head.ejs") %>
+<body>
+    <!--Navigation Menu an Bar teacher-->
+        <%- include("./partials/nav.ejs") %>
+
+    <!--Showcase or main header area-->  
+        
+
+            <div class="courses content p-5" >                
+                <h2 class="name"><%=cartDetails.name %>'s Cart</h2> 
+                
+                <% if (cartDetails.cart.length > 0) { %> 
+                  <% cartDetails.cart.forEach(menuItem => { %>
+                 
+                    <form  action="/cart/deleteFromCart/<%= cartDetails._id%> " " method="post">
+                    
+                    <a class="single" href="#">
+                        <img src="<%= menuItem.courseImg%>" class="img-fluid  mt-3" style="width:10%;" float="left" alt="">
+                        <h3 class="name"><%= menuItem.courseName %></h3>          
+                       <!-- <p class="price">Price: <%= menuItem.coursePrice %></p>                        
+                        <p class="quantity">Quantity:  <%= menuItem.quantity %> </p>-->
+
+                        <label for="price" class="col-form-label">Price: </label>                        
+                        <input type = "number" id="price" class = "price" name = "price" disabled  style="width: 50px;"  value="<%= menuItem.coursePrice %>"> 
+                        
+                        <div class="tip-wrap">
+                          <label for="quantity" class="col-form-label">Quantity: </label>
+                        <input type = "number" id="quantity" class = "quantity" name = "quantity" disabled  style="width: 50px;" value="<%= menuItem.quantity %>">
+                        <div class="update-quantity-tip">
+                          Go back to menu, choose same item to update quantity!
+                        </div> 
+                        </div> 
+
+
+                    </a>
+                        <!--hidden input to have the course id who created the course-->
+                         <input type = "text" id = "courseId" name = "courseId" style="display:none;" value="<%= menuItem.courseId%>">                  
+
+                         
+                         <!--Delete button-->
+                         <button  type="submit"   class="btn btn-danger btn-lg bi bi-chevron-right deleteFromSchedule p-1">Remove from cart</button>  
+                         <!--Back to menu button-->                         
+                        <button    class="btn btn-danger btn-lg bi bi-chevron-right  p-1" type="reset"  onclick="location.href='/cart/menu'">Go to Menu</button>  
+                       
+                        
+                        
+
+                                         
+                    </form>
+                 <br>
+                      
+                      <% }) %>
+                      <% if (cartDetails.cart.length > 0) { %> 
+                      <form  action="/cart/submitOrder/<%= cartDetails._id%> " " method="post">
+
+                        <!-- Add a hidden input for storing the total value -->
+                        <input type="hidden" id="totalPriceHidden" name="carttotal">
+
+
+                        <label for="totalPrice" class="col-form-label">Total Price: </label>
+                        
+                        <input type = "number" step="0.01" id="totalPrice" class = "totalPrice" name = "totalPrice" style="width: 80px;" disabled >  <br> 
+                        <button  type="submit"   class="btn btn-danger btn-lg bi bi-chevron-right submitOrder p-1">Submit Oreder</button>
+
+                      </form>  
+                      <% } %>                   
+          </div>
+              
+                <% } else { %>
+                <p>Cart is Empty...</p>
+                <% } %>
+
+<!-- Footer -->
+<%- include("./partials/footer.ejs") %>     
+
+
+   
+  </body>
+</html>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  let price = document.querySelectorAll('.price');
+  let quantity = document.querySelectorAll('.quantity');
+  let submitOrder = document.querySelector('.submitOrder');
+  let totalPrice = document.getElementById('totalPrice');  
+  let total = 0;
+  
+  for (let i=0; i < quantity.length ; i++){ 
+      
+    let semiTotal = parseFloat(price[i].value) * parseInt(quantity[i].value);
+    
+    total += semiTotal;
+  }
+  totalPriceHidden.value = total.toFixed(2); // Store the total value in the hidden input
+  totalPrice.value = totalPriceHidden.value; // Display the total in the visible input 
+  
+});
+</script>

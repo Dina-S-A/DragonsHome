@@ -1,0 +1,119 @@
+const Course = require('../models/course');
+
+
+//courses_index, course_details, course_create_get, course_create_post, course_delete
+
+
+// getting all courses to coursesIndex page
+const courses_index =(req, res) => { 
+    Course.find().sort({ createdAt: -1 })
+       .then((result) => {
+          res.render('coursesIndex', { title: 'All Courses', courses: result })//geting all courses details and send result to course Index page
+       })
+       .catch((err) => {
+          console.log(err);
+       }); 
+ };
+
+
+// getting add course page
+ const course_create_get = (req, res) => {
+    res.render('addCourse' , { title : 'Add Course'}); 
+ };   
+
+
+//Adding course to DB
+ const course_create_post = (req, res) => {   
+    const course = new Course(req.body);
+   // console.log(req.body);
+    course.save()
+       .then((result) => {
+          res.redirect('./coursesIndex');
+       })
+       .catch((err) => {
+          console.log(err);
+       })
+ };
+
+ //Getting one course details
+ const course_details = (req, res) => {
+   
+    const id = req.params.id;  
+    
+    Course.findById(id)
+     .then(result => {
+       res.render('courseDetails', { course: result, title: 'Course Details' });
+     })
+     .catch(err => {
+       console.log(err);
+     });
+ };
+
+// Getting updating course page
+ const course_update_getpage =  (req, res) => {
+   const id = req.params.id;  
+      Course.findById(id)
+     .then(result => {  
+       res.render('updateCourse', { course: result, title: 'Update Course' });
+       console.log(result);
+     })
+     .catch(err => {
+       console.log(err);
+     });
+ };
+
+ 
+   
+
+ //Updating a course  
+ const course_update_post = (req, res) => {   
+   const id = req.params.id;    
+   const course = req.body; 
+   console.log(course)  
+  Course.updateOne(
+      { _id: id },
+     {$set: { name: course.name, 
+             desc: course.desc, 
+             subArea: course.subArea, 
+             numcred: course.numcred }})
+             .then((result) => {
+             res.redirect('/cart/menu');
+        
+       })
+       .catch((err) => {
+          console.log(err);
+       })
+ };
+
+
+
+ 
+
+ //Deleting one course
+ const course_delete = (req, res) => {
+   console.log(req.params);
+    const id = req.params.id;
+    
+    Course.findByIdAndDelete(id)
+      .then(result => {
+        res.json({ redirect: './coursesIndex' });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+
+
+ 
+
+module.exports={
+
+    courses_index,
+     course_details,
+      course_create_get,
+       course_create_post,
+        course_delete,       
+         course_update_getpage,
+          course_update_post
+}

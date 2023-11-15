@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./partials/head.ejs") %>
+<body>
+    <!--Navigation Menu an Bar teacher-->
+    <%- include("./partials/nav.ejs") %>
+
+    <!--Course Details-->
+    <section class="p-5 bg-success">
+        <div class="details container p-5 bg-white " >
+         
+        <h2>Requisted Course</h2>                     
+            
+        <form action="/courses/updateCourseGet/<%= course._id%>">   
+          
+            <h3 class="name" name="name"><%= course.name %></h3>   
+            <br>             
+            <p class="courseDesc text-wrap" style="width: 30rem;" name="description">Description: <%= course.desc %></p>        
+            <p class="subArea" name="subArea">Subject Area: <%= course.subArea %></p>
+            <p class="numcred" name="credits">Credits: <%= course.numcred %></p> 
+           
+            <!--only display delete button if the logged in member is the one created the course-->
+            <% if(student){if (course.createdBy.equals(student._id)) { %>
+          <button class="btn btn-danger btn-lg bi bi-chevron-right delete p-1"    data-doc="<%= course._id %>">Delete</button>
+          <br><br>
+          <button type="submit" class="btn btn-danger btn-lg bi bi-chevron-right update p-1" >Update</button>
+          
+          <% } }%>
+
+        </form>
+          <p></p>
+        
+      
+      </div>
+      </section>
+
+      
+    
+
+    <!-- Footer -->
+    <%- include("./partials/footer.ejs") %>
+       <!--js code to for delete button-->
+    <script>
+     
+        const trashcan = document.querySelector('.delete');
+            
+        trashcan.addEventListener('click', (e) => {
+          const endpoint = `/courses/${trashcan.dataset.doc}`; //<!--note here we used datset.doc as doc is name we gave to data in <.delete> above which has the id-->
+    
+          fetch(endpoint, {
+            method: 'DELETE',
+          })
+          .then((response) => response.json())
+          .then((data) => window.location.href = data.redirect)
+          .catch(err => console.log(err));
+        });
+
+        
+        
+    </script>
+
+</body>
+</html>

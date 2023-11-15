@@ -1,0 +1,114 @@
+<html lang="en">
+  <%- include('./partials/head.ejs') %>
+<body>
+
+  <%- include('./partials/nav.ejs') %>
+  
+  
+
+  <!--Trial to see if cards thing would work -->
+  <!--<div class="courses content p-5 ">-->
+  <!--Cart Icon-->
+  <br><br>
+  <%if (member) {%>
+  <a href="/cart/<%= member._id %>">
+    <%if (student) {%>
+      <a href="/cart/<%= student._id %>">
+  <% }} %> 
+    <div class="shopping">
+      <img src="../img/shopping.svg">
+      <!--<span class="quantity">0</span>-->
+    </div>
+  </a>
+  
+
+   
+     <!--Boxes-->
+    <section class="p-5">
+      <div class="container">
+        <h2>Our Menu</h2>
+        <h3 class="text-dark mb-5">Click add to cart to add one item to cart and then adjust quantity in the cart</h3>
+        
+          <div class="row  text-center  g-2">
+            <% let count = 0; %>
+    <% if (courses.length > 0) { %>
+     
+      <% courses.forEach(course => { %>
+        <% count ++ %>    
+            
+              <div class="col-md-4" >  
+                  <div class="card bg-dark  "   >                      
+                      <div class="card-body text text-light center">
+                        <form  class="form" action="/cart/addToCart" method="post">
+                        <div class="h1 mb-3">
+                          
+                          <img src="../img/eye.jpg" class="img-fluid  mt-3" style="width:35%;" float="left" alt="">
+                            <!--<i class="bi bi-laptop"></i>-->
+                        </div>
+                        
+                          <h3 class="card-title mb-3 name">
+                            <%= course.name %>
+                          </h3>
+                          
+                          <p class="card-text text-light subArea ">
+                            <%= course.desc %>
+                          </p>
+                          <!--<label for="quantity" class="col-form-lable text-light">
+                            Quantity:
+                          </label>
+                          <input type="number" min="0" max="30" class="quantity " name="quantity" value="0" id="quantity"> <br>-->
+
+                          <!--hidden input to have the course information -->
+                          <input type = "text" id = "courseId" name="courseId" style="display:none;" value="<%= course._id%>"> 
+                          <input type = "text" id = "name" name="name" style="display:none;" value="<%= course.name%>"> 
+                          <input type = "text" id = "description" name = "description" style="display:none;" value="<%= course.desc%>"> 
+                          <input type = "text" id = "subArea" name = "subArea" style="display:none;" value="<%= course.subArea%>"> 
+                          <input type = "text" id = "credits" name = "credits" style="display:none;" value="<%= course.numcred%>"> 
+
+                          <%if (student) {%>
+                          <!--hidden input to have the member id who created the course-->
+                          <input type = "text" id = "studentId" name = "studentId" style="display:none;" value="<%= student._id%>"> 
+                          <% } %>   
+                          <%if (member) {%>
+                          <!--hidden input to have the member id who created the course-->
+                          <input type = "text" id = "memberId" name = "memberId" style="display:none;" value="<%= member._id%>"> 
+                          <% } %>   
+                          <%if (student || member) {%>                          
+                          <button type="submit" class="btn btn-danger btn-lg bi bi-chevron-right addToCart p-1" >Add to cart</button>
+                          <% } %>   
+                        </form>
+                        
+                      </div>                       
+                   </div>                  
+                </div>   
+          
+
+      <% }) %>
+      <!--Code to count the number of items in the menu-->
+      <%= console.log(count)%>  
+      <input type = "text" id = "count" name = "count" style="display:none;" value="<%= count %>"> 
+
+    </div>
+  </div>
+</section>
+<% } else { %>
+    <p>There are no courses to display...</p>
+<% } %>
+
+<%- include('./partials/footer.ejs') %> 
+
+<script type="module">
+let form = document.querySelectorAll('.form');
+let quantity = document.querySelector('.quantity');
+let addToCartBtn = document.querySelectorAll('.addToCart');
+for (let i=0; i < addToCartBtn.length ; i++){
+  
+  addToCartBtn[i].addEventListener('click', ()=>{
+    form[i].submit();
+  addToCartBtn[i].disabled = true;})
+}
+
+</script>
+  
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./partials/head.ejs") %>
+<body>
+    <!--Navigation Menu an Bar teacher-->
+    <%- include("./partials/nav.ejs") %>
+
+    <!--Course Details teacher-->
+    <section class="p-5 bg-success">
+        <div class="details container p-5 bg-white " style="height:500px;">
+          
+         
+        <h2>Welcome to the Dragons </h2> 
+        <img src="<%= course.subArea%>" class="img-fluid w-50 d-none d-sm-block float-end mb-5 food-img"  float="left" alt="" style="float: right;"><br><br>
+          
+          <form  action="/cart/addToCart" method="post">           
+            
+            <h3 class="name" name="name">   <%= course.name %> </h3>  
+           
+            <br>            
+            <p class="courseDesc text-wrap" style="width: 30rem;" name="description">Description: <%= course.desc %></p>     
+           
+            <p class="numcred" name="credits">Price: $<%= course.numcred %></p> 
+           
+           
+
+            <%if (student || member) {%>       
+            <label for="quantity" class="col-form-label">Quantity: </label>
+            <!--<button class="minus" >-</button><input type="number" name="quantity" class="quantity" min="1" max="30" style="width: 45px;"/><button class="plus">+</button><br>-->
+            <input type="number" name="quantity" class="quantity" value="1" min="1" max="30" style="width:45px;"/><br><br>
+            <% } %>      
+            <!--hidden input to have the course information -->
+            <input type = "text" id = "courseId" name="courseId" style="display:none;" value="<%= course._id%>"> 
+            <input type = "text" id = "name" name="name" style="display:none;" value="<%= course.name%>"> 
+            <input type = "text" id = "description" name = "description" style="display:none;" value="<%= course.desc%>"> 
+            <input type = "text" id = "subArea" name = "subArea" style="display:none;" value="<%= course.subArea%>"> 
+            <input type = "text" id = "credits" name = "credits" style="display:none;" value="<%= course.numcred%>"> 
+           
+            <%if (student) {%>
+                <!--hidden input to have the student id who created the course-->
+                <input type = "text" id = "studentId" name = "studentId" style="display:none;" value="<%= student._id%>"> 
+                <% } %>   
+                <%if (member) {%>
+                <!--hidden input to have the member id who created the course-->
+                <input type = "text" id = "memberId" name = "memberId" style="display:none;" value="<%= member._id%>"> 
+                <% } %>   
+                <%if (student || member) {%>                          
+                <button type="submit" class="btn btn-danger btn-lg bi bi-chevron-right addToCart p-1" >Update cart</button>
+                <% } else {%>
+                   <!--Back to menu button-->                         
+                   <button    class="btn btn-danger btn-lg bi bi-chevron-right  p-1" type="reset"  onclick="location.href='/memberSignup'">Sign Up to Order</button>  
+                   <% } %>         
+                           
+
+          <p></p>
+        </form>
+       </div>
+      </section>
+    
+
+    <!-- Footer -->
+    <%- include("./partials/footer.ejs") %>
+       <!--js code to for delete button-->
+    <script>
+      let plus = document.querySelector(".plus");
+      let minus = document.querySelector(".minus");
+      let quantity = document.querySelector(".quantity");
+
+      plus.addEventListener('click', ()=>{ 
+        event. preventDefault()   
+    quantity.value = quantity.value + 1;
+    });
+
+    minus.addEventListener('click', ()=>{ 
+      event. preventDefault()   
+    quantity.value = quantity.value - 1;
+    });
+
+    </script>
+  </body>
+</html>
